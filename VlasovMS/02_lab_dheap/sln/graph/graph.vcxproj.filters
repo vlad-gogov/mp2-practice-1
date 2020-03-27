@@ -7,6 +7,9 @@
     <Filter Include="src">
       <UniqueIdentifier>{0ac033ee-3365-49e6-b253-a8e60a4b3e3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{937607f5-3742-4571-ac1c-af8e3ce2c4f3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\sample\graph.cpp" />
@@ -17,6 +20,15 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\TPair.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TAdjacencyMatrix.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TAdjacencyList.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TPathData.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -30,5 +42,22 @@
     <ClInclude Include="..\..\include\TPair.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\TAdjacencyMatrix.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\TAdjacencyList.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\Exception.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\TPathData.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\Debug\lib.lib">
+      <Filter>resources</Filter>
+    </Library>
   </ItemGroup>
 </Project>
