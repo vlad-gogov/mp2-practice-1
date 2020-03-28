@@ -18,6 +18,10 @@ int main()
     std::cout << '\n';
 
     THeap<int> heap(arr, size);
-    heap.heapify();
+    std::cout << "Heapified array: ";
+    heap.print();
+    std::cout << "Top min: " << heap.topMin() << std::endl;
+    std::cout << "After pop min: ";
+    heap.popMin();
     heap.print();
 }

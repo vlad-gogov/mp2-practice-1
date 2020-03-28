@@ -10,6 +10,7 @@ bool TGraph::connected(const TAdjacencyMatrix& adjMatrix) const
                 adjList.add(i, j);
                 adjList.add(j, i);
             }
+    // Use BFS to check if graph has one connectivity component
     std::vector<bool> vertexUsed;
     vertexUsed.resize(vertexCount, false);
     std::queue<TVertexId> vertexQueue;
@@ -29,6 +30,7 @@ bool TGraph::connected(const TAdjacencyMatrix& adjMatrix) const
             }
         }
     }
+    // If there are vertexes not used in BFS then graph is not connected
     bool isGraphConnected = true;
     for (size_t i = 0; i < vertexUsed.size(); i++)
         if (!vertexUsed[i])

@@ -10,26 +10,26 @@ class THeap
     int base;
     TData* elements;
 
-    void transpose(int i, int j);
     int min(int first, int second) const;
-    int findMinChild(int i) const;
-    void popUp(int i);
-    void dipDown(int i);
+
 public:
     THeap<TData>(const THeap<TData>&) = default;
     THeap<TData>(TData* elements_, int size_, int base_ = 2);
     ~THeap<TData>() = default;
 
+    int findMinChild(int i) const;
+    const TData& topMin() const;
+
+    void transpose(int i, int j);
+    void popUp(int i);
+    void dipDown(int i);
     void heapify();
     void popMin();
-    const TData& topMin() const;
     void sort();
 
     void print() const;
-
     bool full() const;
     bool empty() const;
-
     inline int getSize() const;
     inline int getCapacity() const;
 };

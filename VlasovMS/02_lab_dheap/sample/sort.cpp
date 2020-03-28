@@ -1,6 +1,6 @@
 #include <iostream>
 #include <random>
-#include "THeap.h"
+#include "TArrayController.h"
 
 constexpr int size = 10;
 
@@ -17,8 +17,7 @@ int main()
     }
     std::cout << '\n';
 
-    THeap<int> heap(arr, size);
-    heap.sort();
+    TArrayController::heapSort(arr, size);
     for (int i = 0; i < size; i++)
         std::cout << arr[i] << ' ';
     std::cout << '\n';
