@@ -24,6 +24,7 @@
     <ClCompile Include="..\..\src\TAdjacencyMatrix.cpp" />
     <ClCompile Include="..\..\src\TEdge.cpp" />
     <ClCompile Include="..\..\src\TGraph.cpp" />
+    <ClCompile Include="..\..\src\GraphAlgorithms.cpp" />
     <ClCompile Include="..\..\src\TPair.cpp" />
     <ClCompile Include="..\..\src\TPathData.cpp" />
   </ItemGroup>
@@ -33,6 +34,7 @@
     <ClInclude Include="..\..\include\TAdjacencyMatrix.h" />
     <ClInclude Include="..\..\include\TEdge.h" />
     <ClInclude Include="..\..\include\TGraph.h" />
+    <ClInclude Include="..\..\include\GraphAlgorithms.h" />
     <ClInclude Include="..\..\include\TPair.h" />
     <ClInclude Include="..\..\include\TPathData.h" />
   </ItemGroup>

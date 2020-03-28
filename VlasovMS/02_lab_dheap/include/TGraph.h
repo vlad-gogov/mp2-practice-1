@@ -36,9 +36,10 @@ public:
 
     void print() const;
     TAdjacencyMatrix generateAdjacencyMatrix() const;
-    TGraph kruskalAlgorithm() const;
-    TPathData dijkstraAlgorithm(TVertexId startVertex = 0) const;
+    TGraph findMinimumSpanningTree() const;
+    TPathData findShortestPaths(TVertexId startVertex = 0) const;
 
+    // Some accessors to make this class useful
     inline int getVertexCount() const;
     inline int getEdgesCount() const;
     bool hasEdge(TVertexId x, TVertexId y) const;

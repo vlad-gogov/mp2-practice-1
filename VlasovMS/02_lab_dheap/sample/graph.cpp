@@ -1,5 +1,5 @@
 #include <iostream>
-#include "TGraph.h"
+#include "GraphAlgorithms.h"
 
 int main()
 {
@@ -19,7 +19,7 @@ int main()
     std::cout << "Test Graph 1:\n";
     graph1.print();
     std::cout << "Paths Tree 1:\n";
-    graph1.kruskalAlgorithm().print();
+    GraphAlgorithms::kruskalAlgorithm(graph1).print();
 
     std::cout << "Test Graph 2:\n";
     TGraph graph2({
@@ -39,7 +39,7 @@ int main()
         }, 8);
     graph2.print();
     std::cout << "Paths Data 2:\n";
-    TPathData pathData = graph2.dijkstraAlgorithm();
+    TPathData pathData = GraphAlgorithms::dijkstraAlgorithm(graph2);
     TPathList pathList = pathData.getPaths();
     for (size_t i = 0; i < pathList.size(); i++)
     {
@@ -54,9 +54,9 @@ int main()
     std::cin >> graph3;
     graph3.print();
     std::cout << "Paths Tree 3:\n";
-    graph3.kruskalAlgorithm().print();
+    GraphAlgorithms::kruskalAlgorithm(graph3).print();
     std::cout << "Paths Data 3:\n";
-    pathData = graph3.dijkstraAlgorithm();
+    pathData = GraphAlgorithms::dijkstraAlgorithm(graph3);
     pathList = pathData.getPaths();
     for (size_t i = 0; i < pathList.size(); i++)
     {

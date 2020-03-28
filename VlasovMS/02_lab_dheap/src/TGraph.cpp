@@ -179,7 +179,7 @@ TGraph& TGraph::operator=(TGraph&& other)
     return *this;
 }
 
-TGraph TGraph::kruskalAlgorithm() const
+TGraph TGraph::findMinimumSpanningTree() const
 {
     TDisjointSet vertex(vertexCount);
     TGraph result;
@@ -207,7 +207,7 @@ TGraph TGraph::kruskalAlgorithm() const
     return result;
 }
 
-TPathData TGraph::dijkstraAlgorithm(TVertexId startVertex) const
+TPathData TGraph::findShortestPaths(TVertexId startVertex) const
 {
     float* dist = new float[vertexCount];
     TVertexId* up = new TVertexId[vertexCount];

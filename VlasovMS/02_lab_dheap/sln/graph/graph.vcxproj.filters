@@ -31,6 +31,9 @@
     <ClCompile Include="..\..\src\TPathData.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\GraphAlgorithms.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\TEdge.h">
@@ -52,6 +55,9 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\TPathData.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\GraphAlgorithms.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>
