@@ -5,6 +5,7 @@
 template <typename TData>
 class TBinaryTree
 {
+protected:
 	TNode<TData>* pRoot;
 public:
 	TBinaryTree();
