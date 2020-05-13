@@ -3,7 +3,7 @@
 #include "../include/TNode.h"
 
 template <typename TData>
-class BalanceTNode : protected TNode<TData>
+class BalanceTNode : public TNode<TData>
 {
 private:
 	int balance;

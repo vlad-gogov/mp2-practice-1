@@ -44,12 +44,6 @@ TNode<TData>* TNode<TData>::GetLeft()
 }
 
 template <typename TData>
-TNode<TData>* TNode<TData>::GetLeft()
-{
-	return pLeft;
-}
-
-template <typename TData>
 TNode<TData>* TNode<TData>::GetRight()
 {
 	return pRight;
