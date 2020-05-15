@@ -7,7 +7,7 @@ template <typename TKey, typename TData>
 class ScanTable : public Table<TKey, TData>
 {
 protected:
-	TabRecord** records;
+	TabRecord<TKey, TData>** records;
 public:
 	ScanTable(int _tabSize);
 	virtual TabRecord* FindRecord(TKey key);

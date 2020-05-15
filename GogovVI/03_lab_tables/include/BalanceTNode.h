@@ -17,7 +17,7 @@ public:
 };
 
 template <typename TData>
-BalanceTNode<TData>::BalanceTNode() : TNode<TData>(), balance(NULL) {}
+BalanceTNode<TData>::BalanceTNode() : TNode<TData>() {}
 
 template <typename TData>
 BalanceTNode<TData>::BalanceTNode(int key_, TData* pData_, int balance_) : TNode<TData>(key_, pData_), balance(balance_) {}

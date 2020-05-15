@@ -1,5 +1,6 @@
 #ifndef _TABLE_H_
 #define _TABLE_H_
+#include "../include/TabRecord.h"
 
 template <typename TKey, typename TData>
 class Table
@@ -15,7 +16,7 @@ public:
 	bool IsFull() const;
 	int GetDataCount() const;
 
-	virtual TabRecord* FindRecord(TKey key) = 0;
+	virtual TabRecord<TKey, TData>* FindRecord(TKey key) = 0;
 	virtual void InsertRecord(TKey key, TData* data) = 0;
 	virtual void RemoveRecord(TKey key) = 0;
 

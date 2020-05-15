@@ -4,7 +4,7 @@
 #include "../include/TabRecord.h"
 
 template <typename TKey, typename TData>
-class SortTable : public ScanTable<TKey, TData>
+class SortTable : protected ScanTable<TKey, TData>
 {
 protected:
 	void SortData();
@@ -64,7 +64,7 @@ void SortTable<TKey, TData>::InsertRecord(TKey key, TData* data)
 		TabRecord<TKey, TData>* rec = FindRecord(key);
 		for (int i = dataCount; i > currPos; i--)
 		{
-			records[i] = records[i – 1];
+			records[i] = records[i - 1];
 		}
 		records[currPos] = new TabRecord(key, data);
 		dataCount++;

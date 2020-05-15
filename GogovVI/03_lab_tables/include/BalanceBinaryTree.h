@@ -4,11 +4,8 @@
 #include "../include/BalanceTNode.h"
 
 template <typename TData>
-class BalanceBinaryTree : public TBinaryTree<TData>
+class BalanceBinaryTree : protected TBinaryTree<TData>
 {
-private:
-	BalanceTNode* pRoot;
-
 public:
 	BalanceBinaryTree();
 	BalanceBinaryTree(int key_, TData* pData_, int balance_);
@@ -24,7 +21,7 @@ template <typename TData>
 BalanceBinaryTree<TData>::BalanceBinaryTree() : pRoot(nullptr) {}
 
 template <typename TData>
-BalanceBinaryTree<TData>::BalanceBinaryTree(int key_, TData* pData_, int balance_) : BalanceTNode(key_, pData_, balance_) {}
+BalanceBinaryTree<TData>::BalanceBinaryTree(int key_, TData* pData_, int balance_) : pRoot(key_, pData_) {}
 
 template <typename TData>
 BalanceBinaryTree<TData>::~BalanceBinaryTree()
