@@ -1,4 +1,4 @@
-#include "../include/TGraph.h"
+#include "TGraph.h"
 
 TGraph::TGraph()
 {
@@ -83,109 +83,6 @@ bool TGraph::Connectivity(const bool* adjacencyMatrix) const
 		return true;
 	else
 		return false;
-}
-
-TGraph TGraph::KruskalAlgorithm()
-{
-	if (vertexCount == 0 || edgesCount == 0 || edges == nullptr)
-		throw "Invalid graph.\n";
-	TSplitSet vertex(vertexCount);
-	TGraph result;
-	result.vertexCount = vertexCount;
-	result.edges = new Edge[vertexCount - 1];
-	for (int i = 0; i < vertexCount; i++)
-	{
-		vertex.createSingleton((i));
-	}
-	THeap<Edge> tEdges(edges, edgesCount, 2);
-	int tCount = 0;
-	while ((tCount != vertexCount - 1) && (!tEdges.IsEmpty()))
-	{
-		Edge edge = tEdges.popMin();
-		int firstSet = vertex.findSet(edge.k), secondSet = vertex.findSet(edge.n);
-		if (firstSet != secondSet)
-		{
-			vertex.createUnitedSet(firstSet, secondSet);
-			result.edges[tCount] = edge;
-			tCount++;
-		}
-	}
-	result.edgesCount = tCount;
-	return result;
-}
-
-void TGraph::DijkstraAlgorithm(std::vector<std::vector<int>>& path, float*& resultDist, int vertexStart)
-{
-	if (vertexCount == 0 || edgesCount == 0 || edges == nullptr)
-		throw "Invalid graph.\n";
-	float* distTGraph = new float[vertexCount];
-	int* up = new int[vertexCount];
-	Pair* distMark = new Pair[vertexCount];
-	for (int i = 0; i < vertexCount; i++)
-	{
-		if (i == vertexStart)
-			distMark[i].dist = 0;
-		else
-			distMark[i].dist = FLT_MAX;
-		distMark[i].vertex = i;
-		up[i] = 0;
-	}
-	THeap<Pair> marks(distMark, vertexCount, 2);
-	while (!marks.IsEmpty())
-	{
-		Pair minMark = marks.topMin();
-		int index = 0, indexK = 0, indexN = 0;
-		for (int i = 0; i < edgesCount; i++)
-		{
-			if (edges[i].IsIncidental(minMark.vertex))
-			{
-				for (int j = 0; j < marks.GetCurrentSize(); j++)
-				{
-					if (distMark[j].vertex == edges[i].n)
-						indexN = j;
-					if (distMark[j].vertex == edges[i].k)
-						indexK = j;
-				}
-				if (minMark.dist + edges[i].weight < distMark[indexN].dist)
-				{
-					distMark[indexN].dist = minMark.dist + edges[i].weight;
-					up[edges[i].n] = minMark.vertex;
-				}
-				if (minMark.dist + edges[i].weight < distMark[indexK].dist)
-				{
-					distMark[indexK].dist = minMark.dist + edges[i].weight;
-					up[edges[i].k] = minMark.vertex;
-				}
-			}
-		}
-		distTGraph[minMark.vertex] = minMark.dist;
-		marks.popMin();
-	}
-	resultDist = new float[vertexCount];
-	memcpy(resultDist, distTGraph, sizeof(float) * vertexCount);
-	path.resize(vertexCount - 1);
-	for (int i = 0; i < vertexCount; i++)
-	{
-		float maxDistation = distTGraph[0];
-		int maxDistationIndex = 0;
-		for (int j = 1; j < vertexCount; j++)
-			if (maxDistation < distTGraph[j])
-			{
-				maxDistation = distTGraph[j];
-				maxDistationIndex = j;
-			}
-		distTGraph[maxDistationIndex] = -1;
-		if (maxDistationIndex == vertexStart)
-			continue;
-		int v = maxDistationIndex;
-		while (v != vertexStart)
-		{
-			path[i].push_back(v);
-			v = up[v];
-		}
-		path[i].push_back(vertexStart);
-		std::reverse(path[i].begin(), path[i].end());
-	}
 }
 
 std::ostream& operator<<(std::ostream& out, const TGraph& temp)

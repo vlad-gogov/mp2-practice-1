@@ -10,25 +10,31 @@ class THeap
 	int base;
 	TData* elements;
 
+	friend class  HeapSort;
+
 	void transpose(int i, int j);
 	int min(int first, int second) const;
 	int findMinChild(int i) const;
+public:
+	THeap<TData>(TData* elements_, int size, int base_ = 2);
+
 	void popUp(int i);
 	void dipDown(int i);
 	void hilling();
-public:
-	THeap<TData>() = default;
-	THeap<TData>(const THeap<TData>& temp) = default;
-	THeap<TData>(TData* elements_, int size, int base_ = 2);
-	~THeap<TData>() = default;
 
 	const int GetCurrentSize() const;
 	TData popMin();
 	TData topMin();
-	void sort();
-	void Output();
 	bool IsFull();
 	bool IsEmpty();
+
+	friend std::ostream& operator<< (std::ostream& out, THeap<TData>& heap)
+	{
+		for (int i = 0; i < heap.max_size; i++)
+			out << heap.elements[i] << "|";
+		out << "\n";
+		return out;
+	}
 };
 
 template<typename TData>
@@ -131,26 +137,6 @@ template<typename TData>
 TData THeap<TData>::topMin()
 {
 	return elements[0];
-}
-
-template<typename TData>
-void THeap<TData>::sort()
-{
-	hilling();
-	while (current_size > 1)
-	{
-		transpose(0, current_size - 1);
-		current_size--;
-		dipDown(0);
-	}
-}
-
-template<typename TData>
-void THeap<TData>::Output()
-{
-	for (int i = 0; i < max_size; i++)
-		std::cout << elements[i] << "|";
-	std::cout << "\n";
 }
 
 template<typename TData>

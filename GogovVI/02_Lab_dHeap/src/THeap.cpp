@@ -1,1 +1,1 @@
-#include "../include/THeap.h"
+#include "THeap.h"

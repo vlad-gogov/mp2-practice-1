@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\Debug\Lib.lib">
-      <Filter>Исходные файлы</Filter>
-    </Library>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\src\Heap.cpp">
+    <ClCompile Include="..\..\sample\Heap.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\x64\Debug\Lib.lib">
+      <Filter>Исходные файлы</Filter>
+    </Library>
   </ItemGroup>
 </Project>

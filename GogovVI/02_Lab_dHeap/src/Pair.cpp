@@ -1,4 +1,4 @@
-#include "../include/Pair.h"
+#include "Pair.h"
 
 bool Pair::operator<(const Pair& temp) const
 {

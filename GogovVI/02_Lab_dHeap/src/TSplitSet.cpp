@@ -1,4 +1,4 @@
-#include "../include/TSplitSet.h"
+#include "TSplitSet.h"
 
 TSplitSet::TSplitSet(int size)
 {

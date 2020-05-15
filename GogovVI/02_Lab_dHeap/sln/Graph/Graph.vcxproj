@@ -75,6 +75,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);./../../include;</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -147,18 +148,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\sample\Graph.cpp" />
     <ClCompile Include="..\..\src\Edge.cpp" />
     <ClCompile Include="..\..\src\TGraph.cpp" />
-    <ClCompile Include="..\..\src\Pair.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\Edge.h" />
     <ClInclude Include="..\..\include\TGraph.h" />
-    <ClInclude Include="..\..\include\Pair.h" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\Debug\Lib.lib" />
+    <Library Include="..\x64\Debug\Lib.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

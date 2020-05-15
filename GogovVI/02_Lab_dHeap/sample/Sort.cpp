@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/THeap.h"
+#include "HeapSort.h"
 #include "time.h"
 
 int main()
@@ -13,19 +13,19 @@ int main()
 		elements[i] = 1 + rand() / (RAND_MAX / (100 - 1));
 		std::cout << elements[i] << "|";
 	}
-	THeap<float> heapElements;
 	std::cout << std::endl;
 	try
 	{
-		heapElements = THeap<float>(elements, size);
-		std::cout << "Heap: ";
-		heapElements.Output();
+		THeap<float> heapElements = THeap<float>(elements, size);
+		std::cout << "Heap: " << heapElements;
 		std::cout << "Heap sort: ";
-		heapElements.sort();
-		heapElements.Output();
+		HeapSort::heapSort(heapElements);
+		std::cout << heapElements;
 	}
 	catch (const char* message)
 	{
 		std::cout << message;
 	}
+
+	delete[] elements;
 }

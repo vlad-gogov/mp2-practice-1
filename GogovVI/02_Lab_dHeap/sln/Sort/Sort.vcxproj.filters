@@ -18,10 +18,18 @@
     <ClCompile Include="..\..\sample\Sort.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\HeapSort.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="..\Debug\Lib.lib">
+    <Library Include="..\x64\Debug\Lib.lib">
       <Filter>Исходные файлы</Filter>
     </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\HeapSort.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
