@@ -19,10 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\include\Edge.h" />
+    <ClInclude Include="..\..\include\TGraph.h" />
     <ClInclude Include="..\..\include\THeap.h" />
     <ClInclude Include="..\..\include\TSplitSet.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Edge.cpp" />
+    <ClCompile Include="..\..\src\TGraph.cpp" />
     <ClCompile Include="..\..\src\THeap.cpp" />
     <ClCompile Include="..\..\src\TSplitSet.cpp" />
   </ItemGroup>

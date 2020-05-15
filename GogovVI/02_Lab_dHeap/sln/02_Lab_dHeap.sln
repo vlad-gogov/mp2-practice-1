@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graph", "Graph\Graph.vcxproj", "{14178F3A-7D34-42CC-9B2B-67409EDF099A}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sort", "Sort\Sort.vcxproj", "{0A38869F-B9F9-419C-8F10-F8B143E4E15A}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lib", "Lib\Lib.vcxproj", "{3BFF529A-237E-4B68-B9A4-ED1BC3E5BC48}"
@@ -23,14 +21,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{14178F3A-7D34-42CC-9B2B-67409EDF099A}.Debug|x64.ActiveCfg = Debug|x64
-		{14178F3A-7D34-42CC-9B2B-67409EDF099A}.Debug|x64.Build.0 = Debug|x64
-		{14178F3A-7D34-42CC-9B2B-67409EDF099A}.Debug|x86.ActiveCfg = Debug|Win32
-		{14178F3A-7D34-42CC-9B2B-67409EDF099A}.Debug|x86.Build.0 = Debug|Win32
-		{14178F3A-7D34-42CC-9B2B-67409EDF099A}.Release|x64.ActiveCfg = Release|x64
-		{14178F3A-7D34-42CC-9B2B-67409EDF099A}.Release|x64.Build.0 = Release|x64
-		{14178F3A-7D34-42CC-9B2B-67409EDF099A}.Release|x86.ActiveCfg = Release|Win32
-		{14178F3A-7D34-42CC-9B2B-67409EDF099A}.Release|x86.Build.0 = Release|Win32
 		{0A38869F-B9F9-419C-8F10-F8B143E4E15A}.Debug|x64.ActiveCfg = Debug|x64
 		{0A38869F-B9F9-419C-8F10-F8B143E4E15A}.Debug|x64.Build.0 = Debug|x64
 		{0A38869F-B9F9-419C-8F10-F8B143E4E15A}.Debug|x86.ActiveCfg = Debug|Win32
