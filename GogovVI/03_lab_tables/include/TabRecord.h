@@ -11,6 +11,7 @@ public:
 	TabRecord(TKey _key, TData *_data);
 	TData* GetData();
 	TKey GetKey();
+	TabRecord* GetCopy();
 };
 
 template <typename TKey, typename TData>
@@ -18,6 +19,15 @@ TabRecord<TKey, TData>::TabRecord(TKey _key, TData* _data)
 {
 	key = _key;
 	data = _data;
+}
+
+template <typename TKey, typename TData>
+TabRecord<TKey, TData>* TabRecord<TKey, TData>::GetCopy()
+{
+	TabRecord<TKey, TData>* result;
+	result->key = key;
+	result->data = new TData(data);
+	return result;
 }
 
 template <typename TKey, typename TData>

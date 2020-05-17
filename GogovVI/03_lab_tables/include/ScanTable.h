@@ -4,13 +4,13 @@
 #include "../include/TabRecord.h"
 
 template <typename TKey, typename TData>
-class ScanTable : public Table<TKey, TData>
+class ScanTable : protected Table<TKey, TData>
 {
 protected:
 	TabRecord<TKey, TData>** records;
 public:
 	ScanTable(int _tabSize);
-	virtual TabRecord* FindRecord(TKey key);
+	virtual TabRecord<TKey, TData>* FindRecord(TKey key);
 	virtual void InsertRecord(TKey key, TData* data);
 	virtual void RemoveRecord(TKey key);
 };
@@ -21,11 +21,11 @@ ScanTable<TKey, TData>::ScanTable(int _tabSize) : Table(_tabSize) {}
 template <typename TKey, typename TData>
 TabRecord<TKey, TData>* ScanTable<TKey, TData>::FindRecord(TKey key)
 {
-	for (int i = 0; i < dataCount; i++)
+	for (int i = 0; i < this->dataCount; i++)
 	{
 		if (records[i]->key == key)
 		{
-			currPos = i;
+			this->currPos = i;
 			return records[i];
 		}
 	}
@@ -35,21 +35,21 @@ TabRecord<TKey, TData>* ScanTable<TKey, TData>::FindRecord(TKey key)
 template <typename TKey, typename TData>
 void ScanTable<TKey, TData>::InsertRecord(TKey key, TData* data)
 {
-	if (!IsFull())
+	if (!this->IsFull())
 	{
-		records[dataCount++] = new TabRecord<TKey, TData>(key, data);
+		records[this->dataCount++] = new TabRecord<TKey, TData>(key, data);
 	}
 }
 
 template <typename TKey, typename TData>
 void ScanTable<TKey, TData>::RemoveRecord(TKey key)
 {
-	if (!IsEmpty())
+	if (!this->IsEmpty())
 	{
 		if (FindRecord(key) != nullptr)
 		{
-			delete records[currPos];
-			records[currPos] = records[--dataCount];
+			delete records[this->currPos];
+			records[this->currPos] = records[--this->dataCount];
 		}
 	}
 }

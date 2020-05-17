@@ -15,6 +15,7 @@ public:
 	bool IsEmpty() const;
 	bool IsFull() const;
 	int GetDataCount() const;
+	int GetTabSize() const;
 
 	virtual TabRecord<TKey, TData>* FindRecord(TKey key) = 0;
 	virtual void InsertRecord(TKey key, TData* data) = 0;
@@ -24,8 +25,8 @@ public:
 	virtual bool GetNext();
 	virtual bool IsTabEnded() const;
 
-	virtual TKey GetKey() const;
-	virtual TData* GetData() const;
+	virtual TKey GetKey() const = 0;
+	virtual TData* GetData() const = 0;
 };
 
 template <typename TKey, typename TData>
@@ -51,6 +52,12 @@ template <typename TKey, typename TData>
 int Table<TKey, TData>::GetDataCount() const
 {
 	return dataCount;
+}
+
+template <typename TKey, typename TData>
+int Table<TKey, TData>::GetTabSize() const
+{
+	return tabSize;
 }
 
 template <typename TKey, typename TData>

@@ -3,7 +3,7 @@
 #include "../include/TNode.h"
 
 template <typename TData>
-class BalanceTNode : public TNode<TData>
+class BalanceTNode : protected TNode<TData>
 {
 private:
 	int balance;
@@ -25,14 +25,14 @@ BalanceTNode<TData>::BalanceTNode(int key_, TData* pData_, int balance_) : TNode
 template <typename TData>
 BalanceTNode<TData>::~BalanceTNode() 
 {
-	if (pLeft)
-		delete pLeft;
-	if (pRight)
-		delete pRight;
-	if (pParent)
-		delete pParent;
-	if (pData)
-		delete pData;
+	if (this->pLeft)
+		delete this->pLeft;
+	if (this->pRight)
+		delete this->pRight;
+	if (this->pParent)
+		delete this->pParent;
+	if (this->pData)
+		delete this->pData;
 }
 
 template <typename TData>

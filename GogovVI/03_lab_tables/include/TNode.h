@@ -16,6 +16,8 @@ public:
 	~TNode();
 	TNode<TData>* GetLeft();
 	TNode<TData>* GetRight();
+	TNode<TData>* GetParent();
+	int GetKey();
 };
 
 template <typename TData>
@@ -49,4 +51,15 @@ TNode<TData>* TNode<TData>::GetRight()
 	return pRight;
 }
 
+template <typename TData>
+TNode<TData>* TNode<TData>::GetParent()
+{
+	return pParent;
+}
+
+template <typename TData>
+int TNode<TData>::GetKey()
+{
+	return key;
+}
 #endif //!_TNODE_H_
