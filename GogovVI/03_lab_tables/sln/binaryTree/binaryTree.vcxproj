@@ -20,8 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\sample\main.cpp" />
-    <ClCompile Include="..\..\src\BalanceBinaryTree.cpp" />
-    <ClCompile Include="..\..\src\BalanceTNode.cpp" />
+    <ClCompile Include="..\..\src\TBalanceBinaryTree.cpp" />
+    <ClCompile Include="..\..\src\TBalanceNode.cpp" />
     <ClCompile Include="..\..\src\ScanTable.cpp" />
     <ClCompile Include="..\..\src\SortTable.cpp" />
     <ClCompile Include="..\..\src\Table.cpp" />
@@ -30,8 +30,8 @@
     <ClCompile Include="..\..\src\TNode.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\BalanceBinaryTree.h" />
-    <ClInclude Include="..\..\include\BalanceTNode.h" />
+    <ClInclude Include="..\..\include\TBalanceBinaryTree.h" />
+    <ClInclude Include="..\..\include\TBalanceNode.h" />
     <ClInclude Include="..\..\include\ScanTable.h" />
     <ClInclude Include="..\..\include\SortTable.h" />
     <ClInclude Include="..\..\include\Table.h" />
