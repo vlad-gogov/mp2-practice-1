@@ -1,25 +1,25 @@
 #ifndef _SCANTABLE_H_
 #define _SCANTABLE_H_
-#include "../include/Table.h"
-#include "../include/TabRecord.h"
+#include "../include/TTable.h"
+#include "../include/TTabRecord.h"
 
 template <typename TKey, typename TData>
-class ScanTable : protected Table<TKey, TData>
+class TScanTable : protected TTable<TKey, TData>
 {
 protected:
-	TabRecord<TKey, TData>** records;
+	TTabRecord<TKey, TData>** records;
 public:
-	ScanTable(int _tabSize);
-	virtual TabRecord<TKey, TData>* FindRecord(TKey key);
+	TScanTable(int _tabSize);
+	virtual TTabRecord<TKey, TData>* FindRecord(TKey key);
 	virtual void InsertRecord(TKey key, TData* data);
 	virtual void RemoveRecord(TKey key);
 };
 
 template <typename TKey, typename TData>
-ScanTable<TKey, TData>::ScanTable(int _tabSize) : Table(_tabSize) {}
+TScanTable<TKey, TData>::TScanTable(int _tabSize) : TTable(_tabSize) {}
 
 template <typename TKey, typename TData>
-TabRecord<TKey, TData>* ScanTable<TKey, TData>::FindRecord(TKey key)
+TTabRecord<TKey, TData>* TScanTable<TKey, TData>::FindRecord(TKey key)
 {
 	for (int i = 0; i < this->dataCount; i++)
 	{
@@ -33,16 +33,16 @@ TabRecord<TKey, TData>* ScanTable<TKey, TData>::FindRecord(TKey key)
 }
 
 template <typename TKey, typename TData>
-void ScanTable<TKey, TData>::InsertRecord(TKey key, TData* data)
+void TScanTable<TKey, TData>::InsertRecord(TKey key, TData* data)
 {
 	if (!this->IsFull())
 	{
-		records[this->dataCount++] = new TabRecord<TKey, TData>(key, data);
+		records[this->dataCount++] = new TTabRecord<TKey, TData>(key, data);
 	}
 }
 
 template <typename TKey, typename TData>
-void ScanTable<TKey, TData>::RemoveRecord(TKey key)
+void TScanTable<TKey, TData>::RemoveRecord(TKey key)
 {
 	if (!this->IsEmpty())
 	{

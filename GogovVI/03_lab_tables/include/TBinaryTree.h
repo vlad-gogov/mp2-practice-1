@@ -3,48 +3,48 @@
 #include "../include/TNode.h"
 #include <stack>
 
-template <typename TData>
+template <typename TKey, typename TData>
 class TBinaryTree
 {
 protected:
-	TNode<TData>* pRoot;
+	TNode<TKey, TData>* pRoot;
 public:
 	TBinaryTree();
 	TBinaryTree(int, TData*);
 	~TBinaryTree();
 
-	TNode<TData>* search(const int key_) const;
-	TNode<TData>* searchMax(TNode<TData>* root) const;
-	TNode<TData>* searchMin(TNode<TData>* root) const;
-	TNode<TData>* searchNext(TNode<TData>* pTnode) const;
-	TNode<TData>* searchPrev(TNode<TData>* pTnode) const;
-	void insert(TNode<TData>*);
-	void remove(TNode<TData>* node);
+	TNode<TKey, TData>* search(const int key_) const;
+	TNode<TKey, TData>* searchMax(TNode<TKey, TData>* root) const;
+	TNode<TKey, TData>* searchMin(TNode<TKey, TData>* root) const;
+	TNode<TKey, TData>* searchNext(TNode<TKey, TData>* pTnode) const;
+	TNode<TKey, TData>* searchPrev(TNode<TKey, TData>* pTnode) const;
+	void insert(TNode<TKey, TData>*);
+	void remove(TNode<TKey, TData>* node);
 };
 
-template <typename TData>
-TBinaryTree<TData>::TBinaryTree()
+template <typename TKey, typename TData>
+TBinaryTree<TKey, TData>::TBinaryTree()
 {
 	pRoot = nullptr;
 }
 
-template <typename TData>
-TBinaryTree<TData>::TBinaryTree(int key_, TData* pData_)
+template <typename TKey, typename TData>
+TBinaryTree<TKey, TData>::TBinaryTree(int key_, TData* pData_)
 {
-	pRoot = new TNode<TData>(key_, pData_);
+	pRoot = new TNode<TKey, TData>(key_, pData_);
 }
 
-template <typename TData>
-TBinaryTree<TData>::~TBinaryTree()
+template <typename TKey, typename TData>
+TBinaryTree<TKey, TData>::~TBinaryTree()
 {
 	if (pRoot)
 	{
-		std::stack<TNode<TData>*> stack1, stack2;
+		std::stack<TNode<TKey, TData>*> stack1, stack2;
 		stack2.push(pRoot);
 
 		while (!stack2.empty())
 		{
-			TNode<TData>* node = stack2.top();
+			TNode<TKey, TData>* node = stack2.top();
 			stack2.pop();
 
 			if (!node->pLeft)
@@ -57,7 +57,7 @@ TBinaryTree<TData>::~TBinaryTree()
 
 		while (!stack1.empty())
 		{
-			TNode<TData>* node = stack1.top();
+			TNode<TKey, TData>* node = stack1.top();
 			stack1.pop();
 			delete node;
 		}
@@ -66,10 +66,10 @@ TBinaryTree<TData>::~TBinaryTree()
 	}
 }
 
-template <typename TData>
-TNode<TData>* TBinaryTree<TData>::search(const int key_)  const
+template <typename TKey, typename TData>
+TNode<TKey, TData>* TBinaryTree<TKey, TData>::search(const int key_)  const
 {
-	TNode<TData>* current = pRoot;
+	TNode<TKey, TData>* current = pRoot;
 	while ((current != nullptr) && (current->key != key_))
 	{
 		if (key_ < current->key)
@@ -80,35 +80,35 @@ TNode<TData>* TBinaryTree<TData>::search(const int key_)  const
 	return current;
 }
 
-template <typename TData>
-TNode<TData>* TBinaryTree<TData>::searchMax(TNode<TData>* root)  const
+template <typename TKey, typename TData>
+TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchMax(TNode<TKey, TData>* root)  const
 {
-	TNode<TData>* current = root;
+	TNode<TKey, TData>* current = root;
 	while (current->pRight != nullptr)
 		current = current->pRight;
 	return current;
 }
 
-template <typename TData>
-TNode<TData>* TBinaryTree<TData>::searchMin(TNode<TData>* root) const
+template <typename TKey, typename TData>
+TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchMin(TNode<TKey, TData>* root) const
 {
-	TNode<TData>* current = root;
+	TNode<TKey, TData>* current = root;
 	while (current->pLeft != nullptr)
 		current = current->pLeft;
 	return current;
 }
 
-template <typename TData>
-TNode<TData>* TBinaryTree<TData>::searchNext(TNode<TData>* pTNode) const
+template <typename TKey, typename TData>
+TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchNext(TNode<TKey, TData>* pTNode) const
 {
-	TNode<TData>* result = nullptr;
+	TNode<TKey, TData>* result = nullptr;
 	if (pTNode->pRigt != nullptr)
 	{
 		result = searchMin(pTNode);
 		return result;
 	}
 	result = pTNode->pParent;
-	TNode<TData>* temp = TNode;
+	TNode<TKey, TData>* temp = TNode;
 	while ((result != nullptr) && (temp == result->pRight))
 	{
 		temp = result;
@@ -117,17 +117,17 @@ TNode<TData>* TBinaryTree<TData>::searchNext(TNode<TData>* pTNode) const
 	return result;
 }
 
-template <typename TData>
-TNode<TData>* TBinaryTree<TData>::searchPrev(TNode<TData>* pTNode) const
+template <typename TKey, typename TData>
+TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchPrev(TNode<TKey, TData>* pTNode) const
 {
-	TNode<TData>* result = nullptr;
+	TNode<TKey, TData>* result = nullptr;
 	if (pTNode->pLeft != nullptr)
 	{
 		result = searchMax(pTNode);
 		return result;
 	}
 	result = pTNode->pParent;
-	TNode<TData>* temp = TNode;
+	TNode<TKey, TData>* temp = TNode;
 	while ((result != nullptr) && (temp == result->pLeft))
 	{
 		temp = result;
@@ -136,15 +136,15 @@ TNode<TData>* TBinaryTree<TData>::searchPrev(TNode<TData>* pTNode) const
 	return result;
 }
 
-template <typename TData>
-void TBinaryTree<TData>::insert(TNode<TData>* node)
+template <typename TKey, typename TData>
+void TBinaryTree<TKey, TData>::insert(TNode<TKey, TData>* node)
 {
 	if (pRoot == nullptr)
 	{
 		pRoot = node;
 		return;
 	}
-	TNode<TData>* x = pRoot, *y;
+	TNode<TKey, TData>* x = pRoot, *y;
 	while(x != nullptr)
 	{
 		y = x;
@@ -160,10 +160,10 @@ void TBinaryTree<TData>::insert(TNode<TData>* node)
 		y->pRight = node;
 }
 
-template <typename TData>
-void TBinaryTree<TData>::remove(TNode<TData>* z)
+template <typename TKey, typename TData>
+void TBinaryTree<TKey, TData>::remove(TNode<TKey, TData>* z)
 {
-	TNode<TData>* y = nullptr, * x = nullptr;
+	TNode<TKey, TData>* y = nullptr, * x = nullptr;
 	if (!(z->pLeft) && !(z->pRight))
 		y = searchNext(z);
 	else

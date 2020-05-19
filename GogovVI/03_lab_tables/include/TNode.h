@@ -1,33 +1,37 @@
 #ifndef _TNODE_H_
 #define _TNODE_H_
-
-template <typename TData>
-class TNode
+#include <iostream>
+#include "../include/TTabRecord.h"
+template <typename TKey,typename TData>
+class TNode : protected TTabRecord<TKey, TData>
 {
 protected:
 	int key;
 	TNode* pLeft;
 	TNode* pRight;
 	TNode* pParent;
-	TData* pData;
 public:
 	TNode();
 	TNode(int, TData*);
+	TNode(const TNode<TKey, TData>& temp);
 	~TNode();
-	TNode<TData>* GetLeft();
-	TNode<TData>* GetRight();
-	TNode<TData>* GetParent();
+	TNode* GetLeft();
+	TNode* GetRight();
+	TNode* GetParent();
 	int GetKey();
 };
 
-template <typename TData>
-TNode<TData>::TNode() : pParent(nullptr), pData(nullptr), pLeft(nullptr), pRight(nullptr) {}
+template <typename TKey, typename TData>
+TNode<TKey, TData>::TNode() : TTabRecord<TKey, TData>(), pParent(nullptr), pLeft(nullptr), pRight(nullptr) {}
 
-template <typename TData>
-TNode<TData>::TNode(int key_, TData* pData_) : key(key_), pData(pData_), pLeft(nullptr), pRight(nullptr), pParent(nullptr) {}
+template <typename TKey, typename TData>
+TNode<TKey, TData>::TNode(int key_, TData* pData_) : TTabRecord<TKey, TData>(key_, pData_),  pLeft(nullptr), pRight(nullptr), pParent(nullptr) {}
 
-template <typename TData>
-TNode<TData>::~TNode() 
+template <typename TKey, typename TData>
+TNode<TKey, TData>::TNode(const TNode<TKey, TData>& temp) : TTabRecord<TKey, TData>(temp.key, temp.pData), pLeft(nullptr), pRight(nullptr), pParent(nullptr) {}
+
+template <typename TKey, typename TData>
+TNode<TKey, TData>::~TNode() 
 {
 	if (pLeft)
 		delete pLeft;
@@ -35,30 +39,28 @@ TNode<TData>::~TNode()
 		delete pRight;
 	if (pParent)
 		delete pParent;
-	if (pData)
-		delete pData;
 }
 
-template <typename TData>
-TNode<TData>* TNode<TData>::GetLeft()
+template <typename TKey, typename TData>
+TNode<TKey, TData>* TNode<TKey, TData>::GetLeft()
 {
 	return pLeft;
 }
 
-template <typename TData>
-TNode<TData>* TNode<TData>::GetRight()
+template <typename TKey, typename TData>
+TNode<TKey, TData>* TNode<TKey, TData>::GetRight()
 {
 	return pRight;
 }
 
-template <typename TData>
-TNode<TData>* TNode<TData>::GetParent()
+template <typename TKey, typename TData>
+TNode<TKey, TData>* TNode<TKey, TData>::GetParent()
 {
 	return pParent;
 }
 
-template <typename TData>
-int TNode<TData>::GetKey()
+template <typename TKey, typename TData>
+int TNode<TKey, TData>::GetKey()
 {
 	return key;
 }

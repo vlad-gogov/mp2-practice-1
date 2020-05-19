@@ -22,20 +22,20 @@
     <ClCompile Include="..\..\sample\main.cpp" />
     <ClCompile Include="..\..\src\TBalanceBinaryTree.cpp" />
     <ClCompile Include="..\..\src\TBalanceNode.cpp" />
-    <ClCompile Include="..\..\src\ScanTable.cpp" />
-    <ClCompile Include="..\..\src\SortTable.cpp" />
-    <ClCompile Include="..\..\src\Table.cpp" />
-    <ClCompile Include="..\..\src\TabRecord.cpp" />
+    <ClCompile Include="..\..\src\TScanTable.cpp" />
+    <ClCompile Include="..\..\src\TSortTable.cpp" />
+    <ClCompile Include="..\..\src\TTable.cpp" />
+    <ClCompile Include="..\..\src\TTabRecord.cpp" />
     <ClCompile Include="..\..\src\TBinaryTree.cpp" />
     <ClCompile Include="..\..\src\TNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\TBalanceBinaryTree.h" />
     <ClInclude Include="..\..\include\TBalanceNode.h" />
-    <ClInclude Include="..\..\include\ScanTable.h" />
-    <ClInclude Include="..\..\include\SortTable.h" />
-    <ClInclude Include="..\..\include\Table.h" />
-    <ClInclude Include="..\..\include\TabRecord.h" />
+    <ClInclude Include="..\..\include\TScanTable.h" />
+    <ClInclude Include="..\..\include\TSortTable.h" />
+    <ClInclude Include="..\..\include\TTable.h" />
+    <ClInclude Include="..\..\include\TTabRecord.h" />
     <ClInclude Include="..\..\include\TBinaryTree.h" />
     <ClInclude Include="..\..\include\TNode.h" />
   </ItemGroup>

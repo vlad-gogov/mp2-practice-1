@@ -3,8 +3,8 @@
 #include "../include/TNode.h"
 #include <iostream>
 
-template <typename TData>
-class TBalanceNode : protected TNode<TData>
+template <typename TKey, typename TData>
+class TBalanceNode : protected TNode<TKey, TData>
 {
 private:
 	int balance;
@@ -25,14 +25,14 @@ public:
 	}
 };
 
-template <typename TData>
-TBalanceNode<TData>::TBalanceNode() : TNode<TData>() {}
+template <typename TKey, typename TData>
+TBalanceNode<TKey, TData>::TBalanceNode() : TNode<TKey, TData>() {}
 
-template <typename TData>
-TBalanceNode<TData>::TBalanceNode(int key_, TData* pData_, int balance_) : TNode<TData>(key_, pData_), balance(balance_) {}
+template <typename TKey, typename TData>
+TBalanceNode<TKey, TData>::TBalanceNode(int key_, TData* pData_, int balance_) : TNode<TData>(key_, pData_), balance(balance_) {}
 
-template <typename TData>
-TBalanceNode<TData>::~TBalanceNode() 
+template <typename TKey, typename TData>
+TBalanceNode<TKey, TData>::~TBalanceNode() 
 {
 	if (this->pLeft)
 		delete this->pLeft;
@@ -44,14 +44,14 @@ TBalanceNode<TData>::~TBalanceNode()
 		delete this->pData;
 }
 
-template <typename TData>
-int TBalanceNode<TData>::GetBalance()
+template <typename TKey, typename TData>
+int TBalanceNode<TKey, TData>::GetBalance()
 {
 	return balance;
 }
 
-template <typename TData>
-void TBalanceNode<TData>::SetBalance(int balance_)
+template <typename TKey, typename TData>
+void TBalanceNode<TKey, TData>::SetBalance(int balance_)
 {
 	balance = balance_;
 }
