@@ -1,6 +1,7 @@
 #ifndef _TBINARYTREE_H_
 #define _TBINARYTREE_H_
 #include "../include/TNode.h"
+#include <stack>
 
 template <typename TData>
 class TBinaryTree
@@ -10,11 +11,13 @@ protected:
 public:
 	TBinaryTree();
 	TBinaryTree(int, TData*);
-	TNode<TData>* search(int);
-	TNode<TData>* searchMax(int);
-	TNode<TData>* searchMin(int);
-	TNode<TData>* searchNext(TNode<TData>*);
-	TNode<TData>* searchPrev(TNode<TData>*);
+	~TBinaryTree();
+
+	TNode<TData>* search(const int key_) const;
+	TNode<TData>* searchMax(TNode<TData>* root) const;
+	TNode<TData>* searchMin(TNode<TData>* root) const;
+	TNode<TData>* searchNext(TNode<TData>* pTnode) const;
+	TNode<TData>* searchPrev(TNode<TData>* pTnode) const;
 	void insert(TNode<TData>*);
 	void remove(TNode<TData>* node);
 };
@@ -32,7 +35,39 @@ TBinaryTree<TData>::TBinaryTree(int key_, TData* pData_)
 }
 
 template <typename TData>
-TNode<TData>* TBinaryTree<TData>::search(int key_)
+TBinaryTree<TData>::~TBinaryTree()
+{
+	if (pRoot)
+	{
+		std::stack<TNode<TData>*> stack1, stack2;
+		stack2.push(pRoot);
+
+		while (!stack2.empty())
+		{
+			TNode<TData>* node = stack2.top();
+			stack2.pop();
+
+			if (!node->pLeft)
+				stack2.push(node->pLeft);
+			if (!node->pRight)
+				stack2.push(node->pRight);
+
+			stack1.push(node);
+		}
+
+		while (!stack1.empty())
+		{
+			TNode<TData>* node = stack1.top();
+			stack1.pop();
+			delete node;
+		}
+
+		pRoot = nullptr;
+	}
+}
+
+template <typename TData>
+TNode<TData>* TBinaryTree<TData>::search(const int key_)  const
 {
 	TNode<TData>* current = pRoot;
 	while ((current != nullptr) && (current->key != key_))
@@ -46,25 +81,25 @@ TNode<TData>* TBinaryTree<TData>::search(int key_)
 }
 
 template <typename TData>
-TNode<TData>* TBinaryTree<TData>::searchMax(int key_)
+TNode<TData>* TBinaryTree<TData>::searchMax(TNode<TData>* root)  const
 {
-	TNode<TData>* current = pRoot;
+	TNode<TData>* current = root;
 	while (current->pRight != nullptr)
 		current = current->pRight;
 	return current;
 }
 
 template <typename TData>
-TNode<TData>* TBinaryTree<TData>::searchMin(int key_)
+TNode<TData>* TBinaryTree<TData>::searchMin(TNode<TData>* root) const
 {
-	TNode<TData>* current = pRoot;
+	TNode<TData>* current = root;
 	while (current->pLeft != nullptr)
 		current = current->pLeft;
 	return current;
 }
 
 template <typename TData>
-TNode<TData>* TBinaryTree<TData>::searchNext(TNode<TData>* pTNode)
+TNode<TData>* TBinaryTree<TData>::searchNext(TNode<TData>* pTNode) const
 {
 	TNode<TData>* result = nullptr;
 	if (pTNode->pRigt != nullptr)
@@ -83,7 +118,7 @@ TNode<TData>* TBinaryTree<TData>::searchNext(TNode<TData>* pTNode)
 }
 
 template <typename TData>
-TNode<TData>* TBinaryTree<TData>::searchPrev(TNode<TData>* pTNode)
+TNode<TData>* TBinaryTree<TData>::searchPrev(TNode<TData>* pTNode) const
 {
 	TNode<TData>* result = nullptr;
 	if (pTNode->pLeft != nullptr)

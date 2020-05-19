@@ -1,6 +1,7 @@
-#ifndef _BALANCETNODE_H_
-#define _BALANCETNODE_H_
+#ifndef _TBALANCENODE_H_
+#define _TBALANCENODE_H_
 #include "../include/TNode.h"
+#include <iostream>
 
 template <typename TData>
 class TBalanceNode : protected TNode<TData>
@@ -14,6 +15,14 @@ public:
 
 	int GetBalance();
 	void SetBalance(int balance_);
+
+	template<typename TKey, class TData> 
+	friend std::ostream& operator<<(std::ostream& out, const TBalanceNode& temp)
+	{
+		out << "Key: " << temp.GetKey() << "\t Data: " << temp.GetData() << "\t Balance: " << temp.GetBalance();
+
+		return out;
+	}
 };
 
 template <typename TData>

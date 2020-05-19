@@ -1,5 +1,5 @@
-#ifndef __BALANCEBINARYTREE_H_
-#define _BALANCEBINARYTREE_H_
+#ifndef _TBALANCEBINARYTREE_H_
+#define _TBALANCEBINARYTREE_H_
 #include "../include/TBinaryTree.h"
 #include "../include/TBalanceNode.h"
 
@@ -15,21 +15,21 @@ public:
 	TBalanceBinaryTree(int key_, TData* pData_, int balance_);
 	~TBalanceBinaryTree();
 
-	int insert(TBalanceNode<TData>* TNode_, int key_, TData* pData_);
+	int insert(TBalanceNode<TData>** TNode_, int key_, TData* pData_);
 	void remove(TBalanceNode<TData>* BalanceNode, int key_);
 };
 
 template <typename TData>
 TBalanceBinaryTree<TData>::TBalanceBinaryTree() : TBinaryTree<TData>()
 {
-	this->pRoot = dynamic_cast<BalanceTNode<TData>*>(this->pRoot);
+	this->pRoot = dynamic_cast<TBalanceNode<TData>*>(this->pRoot);
 	this->pRoot->balance = 0;
 }
 
 template <typename TData>
 TBalanceBinaryTree<TData>::TBalanceBinaryTree(int key_, TData* pData_, int balance_) : TBinaryTree<TData>(key_, pData_) 
 {
-	this->pRoot = dynamic_cast<TBalanceBinaryTree<TData>*>(this->pRoot);
+	this->pRoot = (TBalanceNode<TData>*)(this->pRoot);
 	this->pRoot->balance = balance_;
 }
 
@@ -41,12 +41,14 @@ TBalanceBinaryTree<TData>::~TBalanceBinaryTree()
 }
 
 template <typename TData>
-int TBalanceBinaryTree<TData>::insert(TBalanceNode<TData>* TNode_, int key_, TData* pData_)
+int TBalanceBinaryTree<TData>::insert(TBalanceNode<TData>** TNode_, int key_, TData* pData_)
 {
-	if (this->pRoot == nullptr)
+	int height = 0;
+	if ((*TNode_) == nullptr)
 	{
-		this->pRoot = new TBalanceBinaryTree<TData>(TNode_, key_, pData_);
-		return 0;
+		(*TNode_) = new TBalanceNode<TData>(key_, pData_);
+		height = 1;
+		return height;
 	}
 	else
 	{
@@ -67,18 +69,44 @@ int TBalanceBinaryTree<TData>::leftTreeBalancing(TBalanceNode<TData>** BalanceNo
 	int height = 0;
 	switch ((*BalanceNode)->GetBalance())
 	{
-	case -1:
+	case 1:
 	{
-		TBalanceNode<TKey, TData>
+		TBalanceNode<TData>* right = (TBalanceNode<TData>*)((*BalanceNode)->pRight);
+		if (right->GetBalance() == 1)
+		{
+			(*BalanceNode)->pRight = right->pLeft;
+			right->pLeft = (*BalanceNode);
+			(*BalanceNode)->SetBalance(0);
+			(*BalanceNode) = right;
+		}
+		else
+		{
+			TBalanceNode<TData>* left = (TBalanceNode<TData>*)(right->pLeft);
+			right->pLeft = left->pRight;
+			left->pRight = right;
+			(*BalanceNode)->pRight = left->pLeft;
+			left->pLeft = (*BalanceNode);
+			if (left->GetBalance() == -1) 
+				(*BalanceNode)->SetBalance(-1);
+			else 
+				(*BalanceNode)->SetBalance(0);
+			if (left->GetBalance() == 1) 
+				(*BalanceNode)->SetBalance(1);
+			else 
+				(*BalanceNode)->SetBalance(0);
+			(*BalanceNode) = left;
+			(*BalanceNode)->SetBalance(0);
+		}
+		height = 0;
 		break;
 	}
 	case 0:
 	{
-		(*BalanceNode)->SetBalance(-1);
+		(*BalanceNode)->SetBalance(1);
 		height = 1;
 		break;
 	}
-	case 1:
+	case -1:
 	{
 		(*BalanceNode)->SetBalance(0);
 		height = 0;
@@ -94,19 +122,19 @@ int TBalanceBinaryTree<TData>::rightTreeBalancing(TBalanceNode<TData>** BalanceN
 	int height = 0;
 	switch ((*BalanceNode)->GetBalance())
 	{
-	case 1:
+	case -1:
 	{
-		BalanceTNode<TData>* left = (BalanceTNode<TData>*)((*BalanceNode)->pLeft);
+		TBalanceNode<TData>* left = (TBalanceNode<TData>*)((*BalanceNode)->pLeft);
 		if (left->GetBalance() == -1)
 		{
-			(*BalanceNode)->pLeft = left->pRight();
+			(*BalanceNode)->pLeft = left->pRight;
 			left->pRight = (*BalanceNode);
 			(*BalanceNode)->SetBalance(0);
 			(*BalanceNode) = left;
 		}
 		else
 		{
-			BalanceTNode<TData>* right = (BalanceTNode<TData>*)(left->right);
+			TBalanceNode<TData>* right = (TBalanceNode<TData>*)(left->right);
 			left->right = right->left;
 			right->left = left;
 			(*BalanceNode)->left = right->right;
@@ -131,7 +159,7 @@ int TBalanceBinaryTree<TData>::rightTreeBalancing(TBalanceNode<TData>** BalanceN
 		height = 1;
 		break;
 	}
-	case -1:
+	case 1:
 	{
 		(*BalanceNode)->SetBalance(0);
 		height = 0;
@@ -176,20 +204,20 @@ void TBalanceBinaryTree<TData>::remove(TBalanceNode<TData>* BalanceNode, int key
 			{
 				if (this->pRoot->GetLeft())
 				{
-					BalanceTNode<TData>* temp = this->pRoot->GetLeft();
+					TBalanceNode<TData>* temp = this->pRoot->GetLeft();
 					delete this->pRoot;
 					this->pRoot = temp;
 				}
 				else
 				{
-					BalanceTNode<TData>* temp = this->pRoot->GetRight();
+					TBalanceNode<TData>* temp = this->pRoot->GetRight();
 					delete this->pRoot;
 					this->pRoot = temp;
 				}
 			}
 			else
 			{
-				BalanceTNode<TData>* root = this->pRoot;
+				TBalanceNode<TData>* root = this->pRoot;
 				this->pRoot = this->pRoot->GetRight();
 				while (this->pRoot->GetLeft() != nullptr)
 					this->pRoot = this->pRoot->GetLeft();
