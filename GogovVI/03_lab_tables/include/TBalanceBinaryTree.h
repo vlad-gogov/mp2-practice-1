@@ -1,10 +1,10 @@
 #ifndef _TBALANCEBINARYTREE_H_
 #define _TBALANCEBINARYTREE_H_
-#include "../include/TBinaryTree.h"
+#include "../include/TBinaryTreeTable.h"
 #include "../include/TBalanceNode.h"
 
 template <typename TKey, typename TData>
-class TBalanceBinaryTree : protected TBinaryTree<TKey, TData>
+class TBalanceBinaryTree : protected TBinaryTreeTable<TKey, TData>
 {
 private:
 	int leftTreeBalancing(TBalanceNode<TKey, TData>** BalanceNode);
@@ -20,14 +20,14 @@ public:
 };
 
 template <typename TKey, typename TData>
-TBalanceBinaryTree<TKey, TData>::TBalanceBinaryTree() : TBinaryTree<TKey, TData>()
+TBalanceBinaryTree<TKey, TData>::TBalanceBinaryTree() : TBinaryTreeTable<TKey, TData>()
 {
 	this->pRoot = reinterpret_cast<TBalanceNode<TKey, TData>*>(this->pRoot);
 	this->pRoot->balance = 0;
 }
 
 template <typename TKey, typename TData>
-TBalanceBinaryTree<TKey, TData>::TBalanceBinaryTree(int key_, TData* pData_, int balance_) : TBinaryTree<TKey, TData>(key_, pData_) 
+TBalanceBinaryTree<TKey, TData>::TBalanceBinaryTree(int key_, TData* pData_, int balance_) : TBinaryTreeTable<TKey, TData>(key_, pData_)
 {
 	this->pRoot = reinterpret_cast<TBalanceNode<TKey, TData>*>(this->pRoot);
 	this->pRoot->balance = balance_;

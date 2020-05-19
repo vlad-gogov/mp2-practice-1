@@ -11,6 +11,8 @@ protected:
 	TNode<TKey, TData>* pRoot;
 	TNode<TKey, TData>* pCurrent;
 
+	void insert(TNode<TKey, TData>* node);
+	void remove(TNode<TKey, TData>* node);
 public:
 	TBinaryTreeTable();
 	TBinaryTreeTable(int key_, TData* pData_);
@@ -21,10 +23,19 @@ public:
 	TNode<TKey, TData>* searchMin(TNode<TKey, TData>* root) const;
 	TNode<TKey, TData>* searchNext(TNode<TKey, TData>* pTnode) const;
 	TNode<TKey, TData>* searchPrev(TNode<TKey, TData>* pTnode) const;
-	void insert(TNode<TKey, TData>*);
-	void remove(TNode<TKey, TData>* node);
 
+	virtual TTabRecord<TKey, TData>* FindRecord(TKey key);
+	virtual void InsertRecord(TKey key, TData* data);
+	virtual void RemoveRecord(const TKey key);
 
+	virtual bool Reset();
+	virtual bool GetNext();
+	virtual bool IsTabEnded() const;
+	virtual bool IsFull() const;
+
+	virtual TTabRecord<TKey, TData>* GetRecord() const;
+	virtual TKey GetKey() const;
+	virtual TData* GetData() const;
 };
 
 template <typename TKey, typename TData>
@@ -192,5 +203,87 @@ void TBinaryTreeTable<TKey, TData>::remove(TNode<TKey, TData>* z)
 		delete z->pData;
 		z->pData = y->pData;
 	}
+}
+
+template <typename TKey, typename TData>
+TTabRecord<TKey, TData>* TBinaryTreeTable<TKey, TData>::FindRecord(TKey key)
+{
+	return search(key);
+}
+
+template <typename TKey, typename TData>
+void TBinaryTreeTable<TKey, TData>::InsertRecord(TKey key, TData* data)
+{
+	if (this->IsFull())
+		throw "Binary Tree Table is full.\n";
+	TNode<TKey, TData>* newTNode = new TNode<TKey, TData>(key, data);
+	insert(newTNode);
+	this->dataCount++;
+}
+
+template <typename TKey, typename TData>
+void TBinaryTreeTable<TKey, TData>::RemoveRecord(const TKey key)
+{
+	if (this->IsEmpty())
+		throw "Binary Tree Table is empty.\n";
+	TNode<TKey, TData>* newTNode = search(key);
+	remove(newTNode);
+	this->dataCount--;
+}
+
+template <typename TKey, typename TData>
+TTabRecord<TKey,TData>* TBinaryTreeTable<TKey, TData>::GetRecord() const
+{
+	return pCurrent;
+}
+
+template <typename TKey, typename TData>
+TKey TBinaryTreeTable<TKey, TData>::GetKey() const
+{
+	return pCurrent->GetKey();
+}
+
+template <typename TKey, typename TData>
+TData* TBinaryTreeTable<TKey, TData>::GetData() const
+{
+	return pCurrent->GetData();
+}
+
+template <typename TKey, typename TData>
+bool TBinaryTreeTable<TKey, TData>::Reset()
+{
+	pCurrent = pRoot;
+	this->currPos = 0;
+	return IsTabEnded();
+}
+
+template <typename TKey, typename TData>
+bool TBinaryTreeTable<TKey, TData>::GetNext()
+{
+	if (!this->IsTabEnded())
+	{
+			TTabRecord<TKey, TData>* node = searchNext(pCurrent);
+			pCurrent = node;
+			this->currPoss++;
+	}
+	return IsTabEnded();
+}
+
+template <typename TKey, typename TData>
+bool TBinaryTreeTable<TKey, TData>::IsTabEnded() const
+{
+	return this->currPos >= this->dataCount;
+}
+
+template <typename TKey, typename TData>
+bool TBinaryTreeTable<TKey, TData>::IsFull() const
+{
+	TTabRecord<TKey, TData>* node = new TTabRecord<TKey, TData>;
+	if (node)
+	{
+		delete node;
+		return false;
+	}
+	return true;
 }
 #endif //!_TBINARYTREE_H_
