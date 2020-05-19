@@ -29,7 +29,7 @@ TBalanceBinaryTree<TKey, TData>::TBalanceBinaryTree() : TBinaryTree<TKey, TData>
 template <typename TKey, typename TData>
 TBalanceBinaryTree<TKey, TData>::TBalanceBinaryTree(int key_, TData* pData_, int balance_) : TBinaryTree<TKey, TData>(key_, pData_) 
 {
-	this->pRoot = (TBalanceNode<TKey, TData>*)(this->pRoot);
+	this->pRoot = dynamic_cast<TBalanceNode<TKey, TData>*>(this->pRoot);
 	this->pRoot->balance = balance_;
 }
 

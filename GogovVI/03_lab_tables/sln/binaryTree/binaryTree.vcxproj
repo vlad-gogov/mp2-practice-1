@@ -36,7 +36,7 @@
     <ClInclude Include="..\..\include\TSortTable.h" />
     <ClInclude Include="..\..\include\TTable.h" />
     <ClInclude Include="..\..\include\TTabRecord.h" />
-    <ClInclude Include="..\..\include\TBinaryTree.h" />
+    <ClInclude Include="..\..\include\TBinaryTreeTable.h" />
     <ClInclude Include="..\..\include\TNode.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

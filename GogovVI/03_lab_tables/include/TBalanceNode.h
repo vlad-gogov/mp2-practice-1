@@ -16,11 +16,9 @@ public:
 	int GetBalance();
 	void SetBalance(int balance_);
 
-	template<typename TKey, class TData> 
-	friend std::ostream& operator<<(std::ostream& out, const TBalanceNode& temp)
+	friend std::ostream& operator<<(std::ostream& out, const TBalanceNode<TKey, TData>& temp)
 	{
-		out << "Key: " << temp.GetKey() << "\t Data: " << temp.GetData() << "\t Balance: " << temp.GetBalance();
-
+		out << "Key: " << temp.GetKey() << "\t Data: " << (*temp.GetData()) << "\t Balance: " << temp.GetBalance();
 		return out;
 	}
 };

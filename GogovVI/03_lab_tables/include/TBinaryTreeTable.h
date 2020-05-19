@@ -1,17 +1,20 @@
-#ifndef _TBINARYTREE_H_
-#define _TBINARYTREE_H_
+#ifndef _TBINARYTREETABLE_H_
+#define _TBINARYTREETABLE_H_
 #include "../include/TNode.h"
+#include "../include/TTable.h"
 #include <stack>
 
 template <typename TKey, typename TData>
-class TBinaryTree
+class TBinaryTreeTable
 {
 protected:
 	TNode<TKey, TData>* pRoot;
+	TNode<TKey, TData>* pCurrent;
+
 public:
-	TBinaryTree();
-	TBinaryTree(int, TData*);
-	~TBinaryTree();
+	TBinaryTreeTable();
+	TBinaryTreeTable(int key_, TData* pData_);
+	~TBinaryTreeTable();
 
 	TNode<TKey, TData>* search(const int key_) const;
 	TNode<TKey, TData>* searchMax(TNode<TKey, TData>* root) const;
@@ -20,22 +23,24 @@ public:
 	TNode<TKey, TData>* searchPrev(TNode<TKey, TData>* pTnode) const;
 	void insert(TNode<TKey, TData>*);
 	void remove(TNode<TKey, TData>* node);
+
+
 };
 
 template <typename TKey, typename TData>
-TBinaryTree<TKey, TData>::TBinaryTree()
+TBinaryTreeTable<TKey, TData>::TBinaryTreeTable()
 {
 	pRoot = nullptr;
 }
 
 template <typename TKey, typename TData>
-TBinaryTree<TKey, TData>::TBinaryTree(int key_, TData* pData_)
+TBinaryTreeTable<TKey, TData>::TBinaryTreeTable(int key_, TData* pData_)
 {
 	pRoot = new TNode<TKey, TData>(key_, pData_);
 }
 
 template <typename TKey, typename TData>
-TBinaryTree<TKey, TData>::~TBinaryTree()
+TBinaryTreeTable<TKey, TData>::~TBinaryTreeTable()
 {
 	if (pRoot)
 	{
@@ -67,7 +72,7 @@ TBinaryTree<TKey, TData>::~TBinaryTree()
 }
 
 template <typename TKey, typename TData>
-TNode<TKey, TData>* TBinaryTree<TKey, TData>::search(const int key_)  const
+TNode<TKey, TData>* TBinaryTreeTable<TKey, TData>::search(const int key_)  const
 {
 	TNode<TKey, TData>* current = pRoot;
 	while ((current != nullptr) && (current->key != key_))
@@ -81,7 +86,7 @@ TNode<TKey, TData>* TBinaryTree<TKey, TData>::search(const int key_)  const
 }
 
 template <typename TKey, typename TData>
-TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchMax(TNode<TKey, TData>* root)  const
+TNode<TKey, TData>* TBinaryTreeTable<TKey, TData>::searchMax(TNode<TKey, TData>* root)  const
 {
 	TNode<TKey, TData>* current = root;
 	while (current->pRight != nullptr)
@@ -90,7 +95,7 @@ TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchMax(TNode<TKey, TData>* root
 }
 
 template <typename TKey, typename TData>
-TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchMin(TNode<TKey, TData>* root) const
+TNode<TKey, TData>* TBinaryTreeTable<TKey, TData>::searchMin(TNode<TKey, TData>* root) const
 {
 	TNode<TKey, TData>* current = root;
 	while (current->pLeft != nullptr)
@@ -99,7 +104,7 @@ TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchMin(TNode<TKey, TData>* root
 }
 
 template <typename TKey, typename TData>
-TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchNext(TNode<TKey, TData>* pTNode) const
+TNode<TKey, TData>* TBinaryTreeTable<TKey, TData>::searchNext(TNode<TKey, TData>* pTNode) const
 {
 	TNode<TKey, TData>* result = nullptr;
 	if (pTNode->pRigt != nullptr)
@@ -118,7 +123,7 @@ TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchNext(TNode<TKey, TData>* pTN
 }
 
 template <typename TKey, typename TData>
-TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchPrev(TNode<TKey, TData>* pTNode) const
+TNode<TKey, TData>* TBinaryTreeTable<TKey, TData>::searchPrev(TNode<TKey, TData>* pTNode) const
 {
 	TNode<TKey, TData>* result = nullptr;
 	if (pTNode->pLeft != nullptr)
@@ -137,7 +142,7 @@ TNode<TKey, TData>* TBinaryTree<TKey, TData>::searchPrev(TNode<TKey, TData>* pTN
 }
 
 template <typename TKey, typename TData>
-void TBinaryTree<TKey, TData>::insert(TNode<TKey, TData>* node)
+void TBinaryTreeTable<TKey, TData>::insert(TNode<TKey, TData>* node)
 {
 	if (pRoot == nullptr)
 	{
@@ -161,7 +166,7 @@ void TBinaryTree<TKey, TData>::insert(TNode<TKey, TData>* node)
 }
 
 template <typename TKey, typename TData>
-void TBinaryTree<TKey, TData>::remove(TNode<TKey, TData>* z)
+void TBinaryTreeTable<TKey, TData>::remove(TNode<TKey, TData>* z)
 {
 	TNode<TKey, TData>* y = nullptr, * x = nullptr;
 	if (!(z->pLeft) && !(z->pRight))

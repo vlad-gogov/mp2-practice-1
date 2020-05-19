@@ -19,6 +19,12 @@ public:
 	TNode* GetRight();
 	TNode* GetParent();
 	int GetKey();
+
+	friend std::ostream& operator<<(std::ostream& out, const TTabRecord<TKey, TData>& temp)
+	{
+		out << "Key: " << temp.key << "\t Data: " << *(temp.pData);
+		return out;
+	}
 };
 
 template <typename TKey, typename TData>
